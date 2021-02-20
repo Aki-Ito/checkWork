@@ -10,11 +10,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //フローティングアクションボタンを押した時の動作
-        //addActivityボタンに画面遷移できるようにする
-        fab.setOnClickListener{
-            val toAddActivityIntent = Intent(this,addActivity::class.java)
-            startActivity(toAddActivityIntent)
-        }
+
     }
 }

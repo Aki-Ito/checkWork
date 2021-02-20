@@ -2,7 +2,7 @@ package app.ito.akki.checkwork
 
 import io.realm.RealmObject
 
-open class bookShelf(
+open class BookShelf(
     open var title: String = "",
     open var authorName: String = "",
     open var money: String = "",

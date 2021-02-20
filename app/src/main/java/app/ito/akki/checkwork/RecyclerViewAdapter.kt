@@ -10,53 +10,37 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import io.realm.OrderedRealmCollection
+import io.realm.RealmRecyclerViewAdapter
 import io.realm.RealmResults
 
 class RecyclerViewAdapter(private val context: Context,
-                          private var bookList: OrderedRealmCollection<bookShelf>?,
+                          private var bookList: OrderedRealmCollection<BookShelf>?,
                           private val autoUpdate: Boolean
 
-): RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>(bookList, autoUpdate), Parcelable {
+): RealmRecyclerViewAdapter<BookShelf,RecyclerViewAdapter.BookShelfViewHolder>(bookList, autoUpdate) {
    //RecyclerViewに表示されるリストを宣言している
-   val items: MutableList<bookShelf> = mutableListOf()
+   val items: MutableList<BookShelf> = mutableListOf()
 
     //ViewHolderクラスを定義して,idを関連付けする
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    class BookShelfViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val bookName : TextView = view.findViewById(R.id.booknameTextView)
         val authorName : TextView = view.findViewById(R.id.authorTextView)
 
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookShelfViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.item_book_data_cell, parent, false)
-        return ViewHolder(view)
+        return BookShelfViewHolder(view)
     }
 
     override fun getItemCount(): Int = bookList?.size ?: 0
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: BookShelfViewHolder, position: Int) {
         //itemsのposition番目の要素をviewに表示するコードをかく。
-       val book: bookShelf = bookList?.get(position) ?: return
+       val book: BookShelf = bookList?.get(position) ?: return
         holder.bookName.text = book.title
         holder.authorName.text = book.authorName
     }
 
 
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeByte(if (autoUpdate) 1 else 0)
-    }
-
-    override fun describeContents(): Int {
-        return 0
-    }
-
-    companion object CREATOR : Parcelable.Creator<RecyclerViewAdapter> {
-        override fun createFromParcel(parcel: Parcel): RecyclerViewAdapter {
-            return RecyclerViewAdapter(parcel)
-        }
-
-        override fun newArray(size: Int): Array<RecyclerViewAdapter?> {
-            return arrayOfNulls(size)
-        }
-    }
 }

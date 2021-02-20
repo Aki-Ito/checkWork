@@ -25,11 +25,13 @@
         android:id="@+id/authorEditText"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
+        android:layout_marginStart="48dp"
         android:layout_marginTop="32dp"
+        android:layout_marginEnd="49dp"
         android:ems="10"
         android:hint="著者名"
         android:inputType="textPersonName"
+        app:layout_constraintEnd_toStartOf="@+id/moneyEditText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titleEditText" />
 
@@ -37,18 +39,18 @@
         android:id="@+id/moneyEditText"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="49dp"
         android:layout_marginTop="32dp"
-        android:layout_marginEnd="56dp"
         android:ems="10"
         android:hint="金額"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/authorEditText"
         app:layout_constraintTop_toBottomOf="@+id/titleEditText" />
 
     <EditText
         android:id="@+id/explanationEditText"
         android:layout_width="300dp"
-        android:layout_height="150dp"
+        android:layout_height="100dp"
         android:layout_marginTop="32dp"
         android:ems="10"
         android:hint="説明"
@@ -57,27 +59,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/authorEditText" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginBottom="112dp"
-        app:layout_constraintBottom_toTopOf="@+id/titleEditText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
-
     <Button
         android:id="@+id/addButton"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="80dp"
+        android:layout_marginBottom="64dp"
         android:backgroundTint="#ffd900"
         android:text="追加"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/book" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
