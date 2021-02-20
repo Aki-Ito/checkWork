@@ -33,7 +33,7 @@ class listActivity : AppCompatActivity() {
         layoutManager.orientation = LinearLayoutManager.HORIZONTAL
         recyclerView.layoutManager = layoutManager
 
-        //RecyclerViewAdapterで宣言したaddAllメソッドを呼んであげて,データを渡してあげる
+        //RecyclerViewAdapterにデータを渡してあげる
         val adapter = RecyclerViewAdapter(this, bookSaved, true)
         recyclerView.adapter = adapter
 

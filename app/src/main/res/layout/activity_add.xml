@@ -7,7 +7,7 @@
     tools:context=".addActivity">
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/titleEditText"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -22,7 +22,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName2"
+        android:id="@+id/authorEditText"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="56dp"
@@ -31,10 +31,10 @@
         android:hint="著者名"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+        app:layout_constraintTop_toBottomOf="@+id/titleEditText" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName3"
+        android:id="@+id/moneyEditText"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -43,10 +43,10 @@
         android:hint="金額"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+        app:layout_constraintTop_toBottomOf="@+id/titleEditText" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName4"
+        android:id="@+id/explanationEditText"
         android:layout_width="300dp"
         android:layout_height="150dp"
         android:layout_marginTop="32dp"
@@ -55,7 +55,7 @@
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
+        app:layout_constraintTop_toBottomOf="@+id/authorEditText" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -63,7 +63,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:layout_marginBottom="112dp"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/titleEditText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

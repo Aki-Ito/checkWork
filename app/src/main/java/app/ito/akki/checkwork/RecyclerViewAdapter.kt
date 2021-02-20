@@ -17,8 +17,8 @@ class RecyclerViewAdapter(private val context: Context,
                           private val autoUpdate: Boolean
 
 ): RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>(bookList, autoUpdate), Parcelable {
-//    //RecyclerViewに表示されるリストを宣言している
-//    val items: MutableList<bookShelf> = mutableListOf()
+   //RecyclerViewに表示されるリストを宣言している
+   val items: MutableList<bookShelf> = mutableListOf()
 
     //ViewHolderクラスを定義して,idを関連付けする
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -35,7 +35,7 @@ class RecyclerViewAdapter(private val context: Context,
     override fun getItemCount(): Int = bookList?.size ?: 0
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        //itemsのposition番目の要素をviewに表示するコードを書こう！
+        //itemsのposition番目の要素をviewに表示するコードをかく。
        val book: bookShelf = bookList?.get(position) ?: return
         holder.bookName.text = book.title
         holder.authorName.text = book.authorName
