@@ -1,5 +1,6 @@
 package app.ito.akki.checkwork
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import io.realm.Realm
@@ -29,6 +30,12 @@ class DetailActivity : AppCompatActivity() {
         textView6.text = book?.money
         textView8.text = book?.explanation
 
+
+        editButton.setOnClickListener {
+            val toAddActivity = Intent(this, addActivity::class.java)
+            toAddActivity.putExtra("book", id)
+            startActivity(toAddActivity)
+        }
 
     }
 

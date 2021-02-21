@@ -28,7 +28,6 @@ class ListActivity : AppCompatActivity() {
         val bookList: RealmResults<BookShelf> = readAll()
 
 
-
         val layoutManager = LinearLayoutManager(this)
         layoutManager.orientation = LinearLayoutManager.HORIZONTAL
         recyclerView.layoutManager = layoutManager
@@ -55,7 +54,6 @@ class ListActivity : AppCompatActivity() {
 
                 toDetailActivity.putExtra("book", clickedBook.id)
                 startActivity(toDetailActivity)
-
 
 
             }
