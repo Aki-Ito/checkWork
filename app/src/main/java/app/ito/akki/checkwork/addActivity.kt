@@ -19,9 +19,6 @@ class addActivity : AppCompatActivity() {
         //ボタンを押したときにrealmの保存が行われる処理を実行する
         //元からデータが保存されている場合、更新処理を行う
         addButton.setOnClickListener {
-            val toListActivity = Intent(this,ListActivity::class.java)
-            startActivity(toListActivity)
-
             val title: String = titleEditText.text.toString()
             val author: String = authorEditText.text.toString()
             val money: String = moneyEditText.text.toString()
@@ -30,16 +27,26 @@ class addActivity : AppCompatActivity() {
             //save()メソッドに値を渡す
             save(title,author,money,explanation)
 
-            //Realmを終了する処理
-            realm.close()
+
+//            val toListActivity = Intent(this,ListActivity::class.java)
+//            startActivity(toListActivity)
+            finish()
+
         }
 
+        //onDestroyの中にrealm.close() by ど
 
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        realm.close()
     }
 
     fun save(title: String, author: String, money: String, explanation: String) {
         //保存する処理を中に記述するようにする
-        realm.executeTransaction {
+        realm.executeTransactionAsync {
 
                 val newBook: BookShelf = it.createObject(BookShelf::class.java)
                 newBook.title = title

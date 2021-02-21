@@ -3,6 +3,7 @@ package app.ito.akki.checkwork
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import io.realm.Realm
 import io.realm.RealmResults
@@ -25,39 +26,47 @@ class ListActivity : AppCompatActivity() {
 
 
         val bookList: RealmResults<BookShelf> = readAll()
-        //タスクリストが空だった時にダミーデータを表示する
-        if (bookList.isEmpty()){
-//            createDummiyData()
-        }
+
+
 
         val layoutManager = LinearLayoutManager(this)
         layoutManager.orientation = LinearLayoutManager.HORIZONTAL
         recyclerView.layoutManager = layoutManager
 
         //RecyclerViewAdapterにデータを渡してあげる
-        val adapter = RecyclerViewAdapter(this, bookList, true)
-        recyclerView.adapter = adapter
+        // val adapter = RecyclerViewAdapter(this, bookList, true)
+        // recyclerView.adapter = adapter
 
-        val adapter2 = BookAdapter(this, bookList, object : BookAdapter.OnItemClickListener{
-            override fun onItemClick(item: BookShelf){
-                //クリック時の処理をここに記述
-                val toDetailActivity = Intent(this,DetailActivity::class.java)
-                startActivity(toDetailActivity)
-            }
-        }, true)
-
+        val adapter2 = BookAdapter(this, bookList, true)
+        recyclerView.adapter = adapter2
 
         //フローティングアクションボタンを押した時の動作
         //addActivityボタンに画面遷移できるようにする
-        fab.setOnClickListener{
-            val toAddActivityIntent = Intent(this,addActivity::class.java)
+        fab.setOnClickListener {
+            val toAddActivityIntent = Intent(this, addActivity::class.java)
             startActivity(toAddActivityIntent)
         }
 
+        //インターフェースの実装
+        //リストの要素をタップされた時に取得して、実装できる
+        adapter2.setOnItemClickListener(object : BookAdapter.OnItemClickListener {
+            override fun onItemClickListener(view: View, position: Int, clickedBook: BookShelf) {
+                val toDetailActivity = Intent(this@ListActivity, DetailActivity::class.java)
+
+                toDetailActivity.putExtra("book", clickedBook.id)
+                startActivity(toDetailActivity)
+
+
+
+            }
+        }
+
+
+        )
 
     }
 
-    fun readAll() : RealmResults<BookShelf> {
+    fun readAll(): RealmResults<BookShelf> {
         return realm.where(BookShelf::class.java).findAll()
     }
 

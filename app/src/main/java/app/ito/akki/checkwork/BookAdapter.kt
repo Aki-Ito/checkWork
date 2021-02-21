@@ -13,41 +13,54 @@ import io.realm.RealmChangeListener
 import io.realm.RealmRecyclerViewAdapter
 import kotlinx.android.synthetic.main.item_book_data_cell.view.*
 
-class BookAdapter (
-        private val context: Context,
-        private var bookList: OrderedRealmCollection<BookShelf>?,
-        private var listener: OnItemClickListener,
-        private val autoUpdate: Boolean
+class BookAdapter(
+    private val context: Context,
+    private var bookList: OrderedRealmCollection<BookShelf>?,
+    private val autoUpdate: Boolean
 ) :
-        RealmRecyclerViewAdapter<BookShelf, BookAdapter.BookViewHolder>(bookList, autoUpdate) {
+    RealmRecyclerViewAdapter<BookShelf, BookAdapter.BookViewHolder>(bookList, autoUpdate) {
 
-       override fun getItemCount(): Int = bookList?.size ?: 0
+    //リスナー格納用変数
+    lateinit var listener: OnItemClickListener
 
-       override fun onBindViewHolder(holder: BookAdapter.BookViewHolder, position: Int) {
-            val book: BookShelf = bookList?.get(position) ?: return
 
-        holder.container.setOnClickListener{
-            listener.onItemClick(book)
-           }
+    class BookViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val container: LinearLayout = view.findViewById(R.id.container)
+        val bookName: TextView = view.findViewById(R.id.booknameTextView)
+        val authorName: TextView = view.findViewById(R.id.authorTextView)
 
-        holder.bookName.text = book.title
-        holder.authorName.text = book.authorName
-       }
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.item_book_data_cell, parent, false)
         return BookViewHolder(view)
     }
 
-       class BookViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val container : LinearLayout = view.findViewById(R.id.container)
-        val bookName : TextView = view.findViewById(R.id.booknameTextView)
-        val authorName : TextView = view.findViewById(R.id.authorTextView)
+    override fun getItemCount(): Int = bookList?.size ?: 0
 
-       }
+    //ViewHolderに表示する画像とテキストを挿入
+    override fun onBindViewHolder(holder: BookAdapter.BookViewHolder, position: Int) {
+        //押されたポジションの本
+        val book: BookShelf = bookList?.get(position) ?: return
+
+        holder.bookName.text = book.title
+        holder.authorName.text = book.authorName
+
+        //タップした時
+        holder.container.setOnClickListener {
+            listener.onItemClickListener(it, position, book)
+        }
+    }
+
 
     interface OnItemClickListener {
-        fun onItemClick(item: BookShelf)
+        //実際にリストが押された時に呼び出されるメソッド
+        fun onItemClickListener(view: View, position: Int, clickedBook: BookShelf)
+    }
+
+    fun setOnItemClickListener(listener: OnItemClickListener) {
+        //Activityで書いた処理の内容を代入してる
+        this.listener = listener
     }
 
 }
