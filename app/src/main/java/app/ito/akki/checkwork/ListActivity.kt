@@ -38,6 +38,13 @@ class ListActivity : AppCompatActivity() {
         val adapter = RecyclerViewAdapter(this, bookList, true)
         recyclerView.adapter = adapter
 
+        val adapter2 = BookAdapter(this, bookList, object : BookAdapter.OnItemClickListener{
+            override fun onItemClick(item: BookShelf){
+                //クリック時の処理をここに記述
+
+            }
+        }, true)
+
 
         //フローティングアクションボタンを押した時の動作
         //addActivityボタンに画面遷移できるようにする
