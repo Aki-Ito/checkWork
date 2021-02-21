@@ -13,7 +13,8 @@ class addActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add)
-        
+        //ツールバーの設定
+        setSupportActionBar(findViewById(R.id.toolbar))
 
         //ボタンを押したときにrealmの保存が行われる処理を実行する
         //元からデータが保存されている場合、更新処理を行う

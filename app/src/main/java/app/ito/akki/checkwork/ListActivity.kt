@@ -41,7 +41,8 @@ class ListActivity : AppCompatActivity() {
         val adapter2 = BookAdapter(this, bookList, object : BookAdapter.OnItemClickListener{
             override fun onItemClick(item: BookShelf){
                 //クリック時の処理をここに記述
-
+                val toDetailActivity = Intent(this,DetailActivity::class.java)
+                startActivity(toDetailActivity)
             }
         }, true)
 
