@@ -37,6 +37,19 @@ class DetailActivity : AppCompatActivity() {
             startActivity(toAddActivity)
         }
 
+        deleteButton.setOnClickListener {
+            realm.executeTransaction {
+                val deleteView = realm.where(BookShelf::class.java)
+                    .equalTo("id", id)
+                    .findFirst()
+
+                    deleteView?.deleteFromRealm()
+
+                val toListActivity = Intent(this,ListActivity::class.java)
+                startActivity(toListActivity)
+            }
+        }
+
     }
 
 
