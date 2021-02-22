@@ -35,12 +35,12 @@ class addActivity : AppCompatActivity() {
             val explanation: String = explanationEditText.text.toString()
             //保存ボタンを押した時に、titleEditTextとcontentEditTextに入力されたテキストを取得し
             //save()メソッドに値を渡す
-            save(title, author, money, explanation, id)
+            save(title, author, money, explanation)
 
 
-//            val toListActivity = Intent(this,ListActivity::class.java)
-//            startActivity(toListActivity)
-            finish()
+            val toListActivity = Intent(this,ListActivity::class.java)
+           startActivity(toListActivity)
+
         }
 
 
@@ -52,15 +52,17 @@ class addActivity : AppCompatActivity() {
         realm.close()
     }
 
-    fun save(title: String, author: String, money: String, explanation: String, id: String?) {
+    fun save(title: String, author: String, money: String, explanation: String) {
         //保存する処理を中に記述するようにする
-        realm.executeTransactionAsync {
+        realm.executeTransaction {
 
+            val id = intent.getStringExtra("book")
 
+            val book: BookShelf? = realm.where(BookShelf::class.java)
+                .equalTo("id", id)
+                .findFirst()
             if (id != null) {
 
-                val book: BookShelf? =
-                    realm.where(BookShelf::class.java).findFirst()
                 book?.title = titleEditText.text.toString()
                 book?.authorName = authorEditText.text.toString()
                 book?.money = moneyEditText.text.toString()
